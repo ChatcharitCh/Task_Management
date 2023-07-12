@@ -1,7 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from taskapp.models import Task
+from django.contrib import messages # Messages Tags
 
 # Create your views here.
 def index(request):
-    all_task = Task.objects.all()  # ดึงข้อมูลทั้งหมดมา
-    return render(request, "index.html", {"all_task": all_task}) 
+    
+    if request.method == "POST":
+        # ดึงข้อมูลจากฟอร์ม
+        name = request.POST["name"]
+        # Valaidate
+        if name == "":
+            messages.warning(request, "Please Insert Task Name")
+            return redirect("/")
+        # Save
+        else:
+            task = Task.objects.create(name = name) # เอามาแต่ชื่อ
+            task.save()
+            messages.success(request, "Saved Successfully")
+            return redirect("/")
+    else :
+        all_task = Task.objects.all()  # ดึงข้อมูลทั้งหมดมา
+        return render(request, "index.html", {"all_task": all_task}) 

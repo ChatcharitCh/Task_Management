@@ -1,7 +1,23 @@
 {% extends "base.html" %}
 
 {% block content%}
-    <h2 class="text-center">Task Management</h2> 
+    <h2 class="text-center">Task Management</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}}" role="alert">
+                {{message}}
+            </div>
+            
+        {% endfor %}
+    {% endif%}
+    <form method="POST">
+        {% csrf_token%} <!-- ถ้าเป็น metohd post ต้องใส่ -->
+        <div class="form-group">
+            <label for="name">Task Name</label>
+            <input type="text" class="form-control" name="name"></input>
+        </div>
+        <button type="submit" class="btn btn-primary my-2">Save</button>
+    </form>
       <table class="table table-striped">
         <thead>
           <tr>
