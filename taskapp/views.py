@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from taskapp.models import Task
 from django.contrib import messages # Messages Tags
+from django.core.paginator import Paginator # Pagination
 
 # Create your views here.
 def index(request):
@@ -21,6 +22,9 @@ def index(request):
             return redirect("/")
     else :
         all_task = Task.objects.all()  # ดึงข้อมูลทั้งหมดมา
+        page = request.GET.get("page")
+        paginator = Paginator(all_task, 5) # กำหนดรายการที่แสดงต่อ 1 หน้า
+        all_task = paginator.get_page(page)
         return render(request, "index.html", {"all_task": all_task}) 
 
 def complete_task(request, task_id):

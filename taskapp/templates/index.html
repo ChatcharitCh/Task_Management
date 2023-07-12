@@ -41,5 +41,18 @@
                 {% endif%}
             {% endfor%}
         </tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% for num in all_task.paginator.page_range %}
+                {% if num != all_task.number %}
+                    <li class="page-item"><a class="page-link" href="?page={{num}}">{{num}}</a></li>
+                {% else %}
+                    <li class="page-item active"><a class="page-link" href="?page={{num}}">{{num}}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+      </nav>
+      
 
 {% endblock %}
