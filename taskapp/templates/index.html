@@ -1,5 +1,31 @@
 {% extends "base.html" %}
 
 {% block content%}
-    <h2 class="text-center">Task Management</h2>
+    <h2 class="text-center">Task Management</h2> 
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">Task</th>
+            <th class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for task in all_task %}
+            
+                {% if task.status %}
+                <tr>
+                    <td class="text-center">{{task.name}}</td>
+                    <td class="text-center"><a href="#" class="btn btn-success">Done</a></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td class="text-center">{{task.name}}</td>
+                    <td class="text-center"><a href="#" class="btn btn-warning">In Progess</a></td>
+                </tr>
+                {% endif%}
+                
+            
+            {% endfor%}
+        </tbody>
+
 {% endblock %}
