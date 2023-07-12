@@ -31,16 +31,14 @@
                 {% if task.status %}
                 <tr>
                     <td class="text-center">{{task.name}}</td>
-                    <td class="text-center"><a href="#" class="btn btn-success">Done</a></td>
+                    <td class="text-center"><a href="{% url 'pending' task.id %}" class="btn btn-success">Done</a></td>
                 </tr>
                 {% else %}
                 <tr>
                     <td class="text-center">{{task.name}}</td>
-                    <td class="text-center"><a href="#" class="btn btn-warning">In Progess</a></td>
+                    <td class="text-center"><a href="{% url 'completed' task.id %}" class="btn btn-warning">Pending</a></td>
                 </tr>
                 {% endif%}
-                
-            
             {% endfor%}
         </tbody>
 
