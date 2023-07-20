@@ -3,7 +3,7 @@ from taskapp.models import Task
 
 # Customized Admin
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ["name", "status"]
+    list_display = ["name", "status", "manager"]
     
 # Register your models here.
 admin.site.register(Task, TaskAdmin)

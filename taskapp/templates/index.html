@@ -18,7 +18,8 @@
         </div>
         <button type="submit" class="btn btn-primary my-2">Save</button>
     </form>
-      <table class="table table-striped">
+     {% if all_task %}
+     <table class="table table-striped">
         <thead>
           <tr>
             <th class="text-center">Task</th>
@@ -53,6 +54,7 @@
             {% endfor %}
         </ul>
       </nav>
+     {% endif %}
       
 
 {% endblock %}
