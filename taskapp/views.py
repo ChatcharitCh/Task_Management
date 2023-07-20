@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from taskapp.models import Task
 from django.contrib import messages # Messages Tags
 from django.core.paginator import Paginator # Pagination
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url="/login")
 def index(request):
     
     if request.method == "POST":
@@ -27,6 +29,7 @@ def index(request):
         all_task = paginator.get_page(page)
         return render(request, "index.html", {"all_task": all_task}) 
 
+@login_required(login_url="/login")
 def complete_task(request, task_id):
     task = Task.objects.get(pk = task_id)
     task.status = True # เปลี่ยนสถานะของงาน
@@ -34,6 +37,7 @@ def complete_task(request, task_id):
     # messages.success(request, "Saved Successfully")
     return redirect("/")
 
+@login_required(login_url="/login")
 def pending_task(request, task_id):
     task = Task.objects.get(pk = task_id)
     task.status = False # เปลี่ยนสถานะของงาน
